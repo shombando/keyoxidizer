@@ -3,6 +3,22 @@
 * Objective
 This is a simple utility designed to make working with [[getting][Keyoxide]]. Keyoxidizer presents the user with prompts to collect the user specific information and then generates the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. This is an unofficial thin wrapper around Keyoxide to make it easier for folks who want to verify their identity but might find the process steps cumbersome without the prompts.
 
+* Usage
+** Option 1
+Clone the repo. Run the script.
+#+BEGIN_SRC sh
+git clone git@github.com:shombando/keyoxidizer.git
+cd keyoxidizer
+./keyoxidizer.sh
+#+END_SRC
+
+** Option 2
+Download the ~keyoxidizer.sh~ script and put it in a keyoxidizer folder (recommended) and open a terminal window in that location, change the file permission to make it executable and then run it:
+#+BEGIN_SRC sh
+chmod +x ./keyoxidizer.sh
+./keyoxidizer.sh
+#+END_SRC
+
 * Supported Platforms
 - Mastodon (adding notation requires user copy-paste looking for better solution)
 
