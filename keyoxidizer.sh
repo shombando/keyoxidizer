@@ -35,13 +35,16 @@ newKey()
    printFingerPrint $keyoxidizer_email
 }
 
+# Print key fingerprint as single string
 printFingerPrint()
 {
-   echo -e "\n\n\\n==================================================\n"
-   echo -e "Here's your GPG fingerprint: \n"
    gpg --with-colons --fingerprint $1 | \
       awk -F: '$1 == "fpr" {print $10;}'| \
-      sed -n '1p'
+      sed -n '1p' > keyoxidizer.fingerprint
+
+   echo -e "\n\n\\n==================================================\n"
+   echo -e "Here's your GPG fingerprint: \n"
+   cat keyoxidizer.fingerprint
    echo -e "==================================================\n\n"
 }
 
