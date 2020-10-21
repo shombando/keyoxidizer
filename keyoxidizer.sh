@@ -32,10 +32,14 @@ newKey()
    sleep 1.5s
    gpg --batch --generate-key ./keyoxidizer.config
    gpg --fingerprint #clears out meta output
+   printFingerPrint $keyoxidizer_email
+}
 
+printFingerPrint()
+{
    echo -e "\n\n\\n==================================================\n"
    echo -e "Here's your GPG fingerprint: \n"
-   gpg --with-colons --fingerprint $keyoxidizer_name | \
+   gpg --with-colons --fingerprint $1 | \
       awk -F: '$1 == "fpr" {print $10;}'| \
       sed -n '1p'
    echo -e "==================================================\n\n"
@@ -46,12 +50,14 @@ exportOpenPGP()
 {
    gpg --export $keyoxidizer_email | \
       curl -T - https://keys.openpgp.org
+   echo -e "Open the link above and click on 'Send verification email' and check your email account."
 }
 
 # Operate on existing key
 existingKey()
 {
-   echo "Loading existing key not yet supported."
+   read -p "Enter email for existing key: " keyoxidizer_email
+   printFingerPrint $keyoxidizer_email
 }
 
 # User request handling
