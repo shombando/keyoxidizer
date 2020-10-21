@@ -63,6 +63,27 @@ existingKey()
    printFingerPrint $keyoxidizer_email
 }
 
+mastodon()
+{
+   echo "Mastodon"
+}
+
+addProof()
+{
+   echo -e "Select platform to add proof"
+   echo -e "1. Mastadon"
+   read keyoxidizer_proof
+
+   case $keyoxidizer_proof in
+      1)
+         mastodon
+         ;;
+      *)
+         echo "Please make a valid selection"
+         ;;
+   esac
+}
+
 # User request handling
 echo -e "Select an option: \n1. Create a new key. \n2. Use an existing key."
 read keyoxidizer_keyType
@@ -72,4 +93,5 @@ if [ "$keyoxidizer_keyType" == "1" ]; then
    exportOpenPGP
 else
    existingKey
+   addProof
 fi
