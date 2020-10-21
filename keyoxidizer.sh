@@ -42,7 +42,7 @@ printFingerPrint()
       awk -F: '$1 == "fpr" {print $10;}'| \
       sed -n '1p' > keyoxidizer.fingerprint
 
-   echo -e "\n\n\\n==================================================\n"
+   echo -e "\n\n\n==================================================\n"
    echo -e "Here's your GPG fingerprint: \n"
    cat keyoxidizer.fingerprint
    echo -e "==================================================\n\n"
@@ -65,7 +65,31 @@ existingKey()
 
 mastodon()
 {
-   echo "Mastodon"
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into your Mastodon account and click Edit Profile."
+   echo -e "Add a new item under Profile metadata with the label OpenPGP"
+   echo -e "Paste in your PGP fingerprint as the content: $fingerPrint"
+
+   read -p "Have completed this step (y/n): " keyoxidizer_response
+
+   if [ "$keyoxidizer_response" == "y" ]; then
+     echo -e "After collecting some input you'll be presented with some text to paste into the pgp prompt"
+     read -p "Enter your full Mastodon instance url (ex: https://fosstodon.org/): " keyoxidizer_url
+     read -p "Enter your Mastodon username with @ (ex: @keyoxide): " keyoxidizer_username
+     keyoxidizer_fullUrl=$keyoxidizer_url$keyoxidizer_username
+
+     #TODO: Use parameters to set notation, potential bug: https://lists.gnupg.org/pipermail/gnupg-users/2019-June/062067.html
+     echo -e "=================================================="
+     echo -e "Paste the following into the gpg prompt including the extra blank line"
+     echo -e "notation\nproof@metacode.biz=$keyoxidizer_fullUrl\nsave\n"
+     echo -e "==================================================\n\n\n\n"
+     gpg --edit-key $fingerPrint
+     gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
+   else
+     echo -e "Exiting"
+   fi
+
 }
 
 addProof()
