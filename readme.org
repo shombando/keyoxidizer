@@ -4,7 +4,7 @@
 This is a simple utility designed to make working with [[getting][Keyoxide]]. Keyoxidizer presents the user with prompts to collect the user specific information and then generates the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. This is an unofficial thin wrapper around Keyoxide to make it easier for folks who want to verify their identity but might find the process steps cumbersome without the prompts.
 
 * Supported Platforms
-- None!
+- Mastodon (adding notation requires user copy-paste looking for better solution)
 
 * Roadmap
 First support loading an existing key that was created by the tool so I can incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.
