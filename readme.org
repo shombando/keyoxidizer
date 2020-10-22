@@ -1,7 +1,8 @@
 #+TITLE: Keyoxidizer - Interactive Keyoxide helper
 
 * Objective
-This is a simple utility designed to make working with [[getting][Keyoxide]]. Keyoxidizer presents the user with prompts to collect the user specific information and then generates the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. This is an unofficial thin wrapper around Keyoxide to make it easier for folks who want to verify their identity but might find the process steps cumbersome without the prompts.
+This is a simple utility designed to make working with [[https://keyoxide.org][Keyoxide]] easier. Keyoxidizer guides the user with prompts to gather their (name, email, etc.) and then handles all the details to generate the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. It will then guide the user in proving ownership their online accounts supported by Keyoxide.
+This is an unofficial thin wrapper around Keyoxide but it does not (and may never) support all Keyoxide features.
 
 * Usage
 ** Option 1

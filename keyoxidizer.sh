@@ -63,6 +63,18 @@ existingKey()
    printFingerPrint $keyoxidizer_email
 }
 
+addNotation()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+   #TODO: Use parameters to set notation, potential bug: https://lists.gnupg.org/pipermail/gnupg-users/2019-June/062067.html
+   echo -e "=================================================="
+   echo -e "Paste the following into the gpg prompt including the extra blank line"
+   echo -e "notation\nproof@metacode.biz=$keyoxidizer_fullUrl\nsave\n"
+   echo -e "==================================================\n\n\n\n"
+   gpg --edit-key $fingerPrint
+   gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
+}
+
 mastodon()
 {
    fingerPrint=`cat keyoxidizer.fingerprint`
@@ -78,18 +90,10 @@ mastodon()
      read -p "Enter your full Mastodon instance url (ex: https://fosstodon.org/): " keyoxidizer_url
      read -p "Enter your Mastodon username with @ (ex: @keyoxide): " keyoxidizer_username
      keyoxidizer_fullUrl=$keyoxidizer_url$keyoxidizer_username
-
-     #TODO: Use parameters to set notation, potential bug: https://lists.gnupg.org/pipermail/gnupg-users/2019-June/062067.html
-     echo -e "=================================================="
-     echo -e "Paste the following into the gpg prompt including the extra blank line"
-     echo -e "notation\nproof@metacode.biz=$keyoxidizer_fullUrl\nsave\n"
-     echo -e "==================================================\n\n\n\n"
-     gpg --edit-key $fingerPrint
-     gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
+     addNotation $keyoxidizer_fullUrl
    else
      echo -e "Exiting"
    fi
-
 }
 
 addProof()
