@@ -21,7 +21,7 @@ chmod +x ./keyoxidizer.sh
 #+END_SRC
 
 * Supported Platforms
-- Mastodon (adding notation requires user copy-paste looking for better solution)
+- Mastodon
 - Domain/DNS (note: sometimes DNS records take some time to update)
 
 * Roadmap

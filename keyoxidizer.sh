@@ -66,12 +66,11 @@ existingKey()
 addNotation()
 {
    fingerPrint=`cat keyoxidizer.fingerprint`
-   #TODO: Use parameters to set notation, potential bug: https://lists.gnupg.org/pipermail/gnupg-users/2019-June/062067.html
-   echo -e "=================================================="
-   echo -e "Paste the following into the gpg prompt including the extra blank line"
-   echo -e "notation\nproof@metacode.biz=$1\nsave\n"
-   echo -e "==================================================\n\n\n\n"
-   gpg --edit-key $fingerPrint
+   {
+      echo notation
+      echo proof@metacode.biz=$1
+      echo save
+   } | gpg --command-fd=0 --status-fd=1 --edit-key $fingerPrint
    gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
 }
 
@@ -83,7 +82,7 @@ mastodon()
    echo -e "Add a new item under Profile metadata with the label OpenPGP"
    echo -e "Paste in your PGP fingerprint as the content: $fingerPrint"
 
-   read -p "Have completed this step (y/n): " keyoxidizer_response
+   read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
      echo -e "After collecting some input you'll be presented with some text to paste into the pgp prompt"
      read -p "Enter your full Mastodon instance url (ex: https://fosstodon.org/): " keyoxidizer_url
@@ -103,7 +102,7 @@ dns()
    echo -e "Add a text record to your DNS records of your domain/sub-domain.\nThe exact instructions will depend on your domain registrar (ex: namecheap) or hosting interface (ex: cpanel): "
    echo -e "Paste this into your DNS text record: \nopenpgp4fpr:$fingerPrint"
 
-   read -p "Have completed this step (y/n): " keyoxidizer_response
+   read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
      addNotation "dns:$keyoxidizer_domain?type=TXT"
    else
