@@ -22,6 +22,7 @@ chmod +x ./keyoxidizer.sh
 
 * Supported Platforms
 - Mastodon (adding notation requires user copy-paste looking for better solution)
+- Domain/DNS (note: sometimes DNS records take some time to update)
 
 * Roadmap
 First support loading an existing key that was created by the tool so I can incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.

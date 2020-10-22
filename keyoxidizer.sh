@@ -69,7 +69,7 @@ addNotation()
    #TODO: Use parameters to set notation, potential bug: https://lists.gnupg.org/pipermail/gnupg-users/2019-June/062067.html
    echo -e "=================================================="
    echo -e "Paste the following into the gpg prompt including the extra blank line"
-   echo -e "notation\nproof@metacode.biz=$keyoxidizer_fullUrl\nsave\n"
+   echo -e "notation\nproof@metacode.biz=$1\nsave\n"
    echo -e "==================================================\n\n\n\n"
    gpg --edit-key $fingerPrint
    gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
@@ -84,7 +84,6 @@ mastodon()
    echo -e "Paste in your PGP fingerprint as the content: $fingerPrint"
 
    read -p "Have completed this step (y/n): " keyoxidizer_response
-
    if [ "$keyoxidizer_response" == "y" ]; then
      echo -e "After collecting some input you'll be presented with some text to paste into the pgp prompt"
      read -p "Enter your full Mastodon instance url (ex: https://fosstodon.org/): " keyoxidizer_url
@@ -96,15 +95,35 @@ mastodon()
    fi
 }
 
+dns()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+   read -p "Enter the domain or subdomain do you want to proove (ex: keyoxide.org -- don't include https://): " keyoxidizer_domain
+
+   echo -e "Add a text record to your DNS records of your domain/sub-domain.\nThe exact instructions will depend on your domain registrar (ex: namecheap) or hosting interface (ex: cpanel): "
+   echo -e "Paste this into your DNS text record: \nopenpgp4fpr:$fingerPrint"
+
+   read -p "Have completed this step (y/n): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     addNotation "dns:$keyoxidizer_domain?type=TXT"
+   else
+      echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    echo -e "Select platform to add proof"
    echo -e "1. Mastadon"
+   echo -e "2. DNS/Domain"
    read keyoxidizer_proof
 
    case $keyoxidizer_proof in
       1)
          mastodon
+         ;;
+      2)
+         dns
          ;;
       *)
          echo "Please make a valid selection"
@@ -119,6 +138,7 @@ read keyoxidizer_keyType
 if [ "$keyoxidizer_keyType" == "1" ]; then
    newKey
    exportOpenPGP
+   addProof
 else
    existingKey
    addProof
