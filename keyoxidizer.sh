@@ -42,7 +42,7 @@ printFingerPrint()
       awk -F: '$1 == "fpr" {print $10;}'| \
       sed -n '1p' > keyoxidizer.fingerprint
 
-   echo -e "\n\n\n==================================================\n"
+   echo -e "=================================================="
    echo -e "Here's your GPG fingerprint: \n"
    cat keyoxidizer.fingerprint
    echo -e "==================================================\n\n"
@@ -59,7 +59,11 @@ exportOpenPGP()
 # Operate on existing key
 existingKey()
 {
-   read -p "Enter email for existing key: " keyoxidizer_email
+   if ! [[ -v  keyoxidizer_email ]]; then
+    read -p "Enter email for existing key: " keyoxidizer_email
+   else
+      echo -e "Using $keyoxidizer_email "
+   fi
    printFingerPrint $keyoxidizer_email
 }
 
@@ -115,6 +119,7 @@ addProof()
    echo -e "Select platform to add proof"
    echo -e "1. Mastadon"
    echo -e "2. DNS/Domain"
+   echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
    case $keyoxidizer_proof in
@@ -124,6 +129,9 @@ addProof()
       2)
          dns
          ;;
+      q)
+         break
+         ;;
       *)
          echo "Please make a valid selection"
          ;;
@@ -131,14 +139,18 @@ addProof()
 }
 
 # User request handling
-echo -e "Select an option: \n1. Create a new key. \n2. Use an existing key."
-read keyoxidizer_keyType
+keyoxidizer_keyType="1"
 
-if [ "$keyoxidizer_keyType" == "1" ]; then
-   newKey
-   exportOpenPGP
-   addProof
-else
-   existingKey
-   addProof
-fi
+while [ $keyoxidizer_keyType != "q" ]; do
+      echo -e "Select an option: \n1. Create a new key. \n2. Use an existing key. \nEnter 'q' to quit"
+      read keyoxidizer_keyType
+
+      if [ "$keyoxidizer_keyType" == "1" ]; then
+       newKey
+       exportOpenPGP
+       addProof
+      elif [ "$keyoxidizer_keyType" == "2" ]; then
+         existingKey
+         addProof
+      fi
+done 
