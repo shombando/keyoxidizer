@@ -27,7 +27,8 @@ chmod +x ./keyoxidizer.sh
 - Mastodon
 
 * Roadmap
-First support loading an existing key that was created by the tool so I can incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.
+- Incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.
+- [[https://keyoxide.org/guides/managing-proofs-listing][List]] and [[https://keyoxide.org/guides/managing-proofs-deleting][delete]] proofs
 
 * Contributing
 I absolutely welcome feedback in the form of PRs, whether it is improving my shell scripting or adding new functionality. A few guidelines to help me out:
