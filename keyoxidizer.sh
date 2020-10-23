@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-echo "Keyoxidizer - Interactive Keyoxide helper"
+echo "Keyoxidizer - Interactive Keyoxide helper. Go to keyoxide.org to learn more."
+echo "This utility requires gpg installed on your system"
 
 # GPG config file for unattended keygen
 generateConfig()
@@ -130,12 +131,30 @@ gitea()
    fi
 }
 
+github()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   read -p "Enter your Github username: " keyoxidizer_username
+   echo -e "Log into your Github account and create a new gist called 'openpgp.md'. \nPaste the following into the gist and be sure to select 'Create public gist':"
+   echo -e "This is an OpenPGP proof that connects [my OpenPGP key](https://keyoxide.org/$fingerPrint) to [this Github account](https://github.com/$keyoxidizer_username). For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter the full url of the repo you created (ex: https://codeberg.org/keyoxide/gitea_proof): " keyoxidizer_url
+     addNotation $keyoxidizer_url
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    echo -e "Select platform to add proof"
-   echo -e "1. Mastadon"
-   echo -e "2. DNS/Domain"
-   echo -e "3. Gitea"
+   echo -e "1. DNS/Domain"
+   echo -e "2. Gitea"
+   echo -e "3. Github"
+   echo -e "4. Mastadon"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 

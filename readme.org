@@ -1,4 +1,4 @@
-#+TITLE: Keyoxidizer - Interactive Keyoxide helper
+#+TITLE:Keyoxidizer - Interactive Keyoxide helper
 
 * Objective
 This is a simple utility designed to make working with [[https://keyoxide.org][Keyoxide]] easier. Keyoxidizer guides the user with prompts to gather their (name, email, etc.) and then handles all the details to generate the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. It will then guide the user in proving ownership their online accounts supported by Keyoxide.
