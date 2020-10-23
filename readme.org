@@ -21,8 +21,10 @@ chmod +x ./keyoxidizer.sh
 #+END_SRC
 
 * Supported Platforms
-- Mastodon
 - Domain/DNS (note: sometimes DNS records take some time to update)
+- Gitea
+- Github
+- Mastodon
 
 * Roadmap
 First support loading an existing key that was created by the tool so I can incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.

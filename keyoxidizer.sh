@@ -141,13 +141,16 @@ addProof()
 
    case $keyoxidizer_proof in
       1)
-         mastodon
-         ;;
-      2)
          dns
          ;;
-      3)
+      2)
          gitea
+         ;;
+      3)
+         github
+         ;;
+      4)
+         mastodon
          ;;
       q)
          break
