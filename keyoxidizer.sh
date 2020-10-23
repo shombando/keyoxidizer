@@ -88,7 +88,6 @@ mastodon()
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
-     echo -e "After collecting some input you'll be presented with some text to paste into the pgp prompt"
      read -p "Enter your full Mastodon instance url (ex: https://fosstodon.org/): " keyoxidizer_url
      read -p "Enter your Mastodon username with @ (ex: @keyoxide): " keyoxidizer_username
      keyoxidizer_fullUrl=$keyoxidizer_url$keyoxidizer_username
@@ -114,11 +113,29 @@ dns()
    fi
 }
 
+gitea()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into your Gitea instance (like codeberg.org account) and create a new repository named 'gitea_proof'."
+   echo -e "Set the project description to: "
+   echo -e "[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter the full url of the repo you created (ex: https://codeberg.org/keyoxide/gitea_proof): " keyoxidizer_url
+     addNotation $keyoxidizer_url
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    echo -e "Select platform to add proof"
    echo -e "1. Mastadon"
    echo -e "2. DNS/Domain"
+   echo -e "3. Gitea"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -128,6 +145,9 @@ addProof()
          ;;
       2)
          dns
+         ;;
+      3)
+         gitea
          ;;
       q)
          break
