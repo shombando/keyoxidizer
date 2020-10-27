@@ -180,6 +180,22 @@ addProof()
    esac
 }
 
+# Generate a script to read back the notation
+# FIXME: I'm unable to capture the full output from the first line
+# so I'm having to capture the whole thing to file and grep it.
+#
+# echo showpref | gpg  --command-fd=0 --status-fd=1 --edit-key $fingerPrint | \
+#   grep "proof@metacode.biz=" | \
+#   awk '{if($1 == "Notations:") print $2; else print $1;}'
+generateNotationScript()
+{
+   echo "#!/usr/bin/env bash" > keyoxidizer_getNotationList.sh
+   echo "set -euo pipefail" >> keyoxidizer_getNotationList.sh
+   echo "fingerPrint=\`cat keyoxidizer.fingerprint\`" >> keyoxidizer_getNotationList.sh
+   echo "output=\$\(echo showpref | gpg  --command-fd=0 --status-fd=1 --edit-key \$fingerPrint\)" >> keyoxidizer_getNotationList.sh
+   chmod +x ./keyoxidizer_getNotationList.sh
+}
+
 # User request handling
 keyoxidizer_keyType="1"
 
