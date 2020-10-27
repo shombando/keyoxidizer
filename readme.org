@@ -20,6 +20,12 @@ chmod +x ./keyoxidizer.sh
 ./keyoxidizer.sh
 #+END_SRC
 
+* Features
+- Generate new key pairs
+- Load existing key
+- Add proofs for Supported Platforms
+- List proofs
+
 * Supported Platforms
 - Domain/DNS (note: sometimes DNS records take some time to update)
 - Gitea
