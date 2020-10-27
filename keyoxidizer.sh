@@ -192,23 +192,53 @@ generateNotationScript()
    echo "#!/usr/bin/env bash" > keyoxidizer_getNotationList.sh
    echo "set -euo pipefail" >> keyoxidizer_getNotationList.sh
    echo "fingerPrint=\`cat keyoxidizer.fingerprint\`" >> keyoxidizer_getNotationList.sh
-   echo "output=\$\(echo showpref | gpg  --command-fd=0 --status-fd=1 --edit-key \$fingerPrint\)" >> keyoxidizer_getNotationList.sh
+   echo "output=\$(echo showpref | gpg  --command-fd=0 --status-fd=1 --edit-key \$fingerPrint)" >> keyoxidizer_getNotationList.sh
    chmod +x ./keyoxidizer_getNotationList.sh
+}
+
+manageProofs()
+{
+   generateNotationScript # generate script each time so code isn't stale
+   ./keyoxidizer_getNotationList.sh
+   script -c ./keyoxidizer_getNotationList.sh keyoxidizer.showpref
+
+   echo -e "\n\n\n=================================================="
+   echo -e "This key contains the following proofs:"
+   grep "proof@metacode.biz=" keyoxidizer.showpref | \
+      awk '{if($1 == "Notations:") print $2; else print $1;}'
+   echo -e "==================================================\n\n\n"
 }
 
 # User request handling
 keyoxidizer_keyType="1"
 
 while [ $keyoxidizer_keyType != "q" ]; do
-      echo -e "Select an option: \n1. Create a new key. \n2. Use an existing key. \nEnter 'q' to quit"
+      echo -e "Select an option: \n\
+         1. Create a new key. \n\
+         2. Add proofs to existing key. \n\
+         3. List proofs from existing key. \n\
+         Enter 'q' to quit"
       read keyoxidizer_keyType
 
-      if [ "$keyoxidizer_keyType" == "1" ]; then
-       newKey
-       exportOpenPGP
-       addProof
-      elif [ "$keyoxidizer_keyType" == "2" ]; then
+      case $keyoxidizer_keyType in
+      1)
+         newKey
+         exportOpenPGP
+         addProof
+         ;;
+      2)
          existingKey
          addProof
-      fi
+         ;;
+      3)
+         existingKey
+         manageProofs
+         ;;
+      q)
+         break
+         ;;
+      *)
+         echo "Please make a valid selection"
+         ;;
+   esac
 done 
