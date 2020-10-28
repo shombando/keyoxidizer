@@ -98,6 +98,23 @@ mastodon()
    fi
 }
 
+reddit()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into your Reddit account and create a new post on your profile"
+   echo -e "Paste in the following as the content (not including the equal signs)"
+   echo -e "===\nThis is an OpenPGP proof that connects my OpenPGP key to this Reddit account. For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]\n==="
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter the link to the post (ex: https://www.reddit.com/user/USERNAME/comments/123123/TITLE/): " keyoxidizer_url
+     addNotation $keyoxidizer_url
+   else
+     echo -e "Exiting"
+   fi
+}
+
 dns()
 {
    fingerPrint=`cat keyoxidizer.fingerprint`
@@ -155,6 +172,7 @@ addProof()
    echo -e "2. Gitea"
    echo -e "3. Github"
    echo -e "4. Mastadon"
+   echo -e "5. Reddit"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -170,6 +188,9 @@ addProof()
          ;;
       4)
          mastodon
+         ;;
+      5)
+         reddit
          ;;
       q)
          break
