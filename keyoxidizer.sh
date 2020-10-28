@@ -211,9 +211,30 @@ listProofs()
    echo -e "==================================================\n"
 }
 
+deleteProof()
+{
+   echo -e "Deleted $proof\n\n\n"
+}
+
 deleteProofs()
 {
    listProofs
+   read -p "Enter the number of the proof you want to delete: " keyoxidizer_response
+   proofs=($(grep proof@metacode.biz ./keyoxidizer.showpref | awk '{if($1 == "Notations:") print $2; else print $1;}'))
+
+   if [ $((keyoxidizer_response)) -gt ${#proofs[*]} ]; then
+    echo -e "Please make a valid selection. Aborting delete."
+   else
+      proof=${proofs[(($keyoxidizer_response-1))]} #1 indexed menus
+      echo -e "You selected: \n$keyoxidizer_response. $proof"
+      read -p "Enter \"yes\" to delete the proof, 'q' to abort: " keyoxidizer_response
+      if [ "$keyoxidizer_response" == "yes" ]; then
+       deleteProof $proof
+      else
+         echo -e "Delete aborted. \n\n\n"
+      fi
+   fi
+
 }
 
 # User request handling
