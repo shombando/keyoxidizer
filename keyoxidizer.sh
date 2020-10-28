@@ -211,7 +211,7 @@ listProofs()
    echo -e "==================================================\n"
 }
 
-deleteProof()
+deleteNotation()
 {
    echo -e "Deleted $proof\n\n\n"
 }
@@ -229,7 +229,7 @@ deleteProofs()
       echo -e "You selected: \n$keyoxidizer_response. $proof"
       read -p "Enter \"yes\" to delete the proof, 'q' to abort: " keyoxidizer_response
       if [ "$keyoxidizer_response" == "yes" ]; then
-       deleteProof $proof
+       deleteNotation $proof
       else
          echo -e "Delete aborted. \n\n\n"
       fi
