@@ -150,6 +150,7 @@ github()
 
 addProof()
 {
+   existingKey
    echo -e "Select platform to add proof"
    echo -e "1. DNS/Domain"
    echo -e "2. Gitea"
@@ -198,6 +199,7 @@ generateNotationScript()
 
 listProofs()
 {
+   existingKey
    generateNotationScript # generate script each time so code isn't stale
    ./keyoxidizer_getNotationList.sh
    script -c ./keyoxidizer_getNotationList.sh keyoxidizer.showpref
@@ -206,7 +208,12 @@ listProofs()
    echo -e "This key contains the following proofs:"
    grep proof@metacode.biz ./keyoxidizer.showpref | \
       awk '{if($1 == "Notations:") print NR ". " $2; else print NR ". " $1;}'
-   echo -e "==================================================\n\n\n"
+   echo -e "==================================================\n"
+}
+
+deleteProofs()
+{
+   listProofs
 }
 
 # User request handling
@@ -217,6 +224,7 @@ while [ $keyoxidizer_keyType != "q" ]; do
          1. Create a new key. \n\
          2. Add proofs to existing key. \n\
          3. List proofs from existing key. \n\
+         4. Delete proofs from existing key. \n\
          Enter 'q' to quit"
       read keyoxidizer_keyType
 
@@ -227,12 +235,13 @@ while [ $keyoxidizer_keyType != "q" ]; do
          addProof
          ;;
       2)
-         existingKey
          addProof
          ;;
       3)
-         existingKey
          listProofs
+         ;;
+      4)
+         deleteProofs
          ;;
       q)
          break
