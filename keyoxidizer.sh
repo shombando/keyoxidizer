@@ -213,10 +213,20 @@ listProofs()
 
 deleteNotation()
 {
-   echo -e "Deleted $proof\n\n\n"
+   fingerPrint=`cat keyoxidizer.fingerprint`
+   removeNotation="-$1"
+   echo $removeNotation #debug
+   {
+      echo notation
+      echo $removeNotation
+      echo save
+   } | gpg --command-fd=0 --status-fd=1 --edit-key $fingerPrint
+   gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
+
+   echo -e "Deleted $1\n\n\n"
 }
 
-deleteProofs()
+deleteProof()
 {
    listProofs
    read -p "Enter the number of the proof you want to delete: " keyoxidizer_response
@@ -225,11 +235,11 @@ deleteProofs()
    if [ $((keyoxidizer_response)) -gt ${#proofs[*]} ]; then
     echo -e "Please make a valid selection. Aborting delete."
    else
-      proof=${proofs[(($keyoxidizer_response-1))]} #1 indexed menus
-      echo -e "You selected: \n$keyoxidizer_response. $proof"
+      notation=${proofs[(($keyoxidizer_response-1))]} #1 indexed menus
+      echo -e "You selected: \n$keyoxidizer_response. $notation"
       read -p "Enter \"yes\" to delete the proof, 'q' to abort: " keyoxidizer_response
       if [ "$keyoxidizer_response" == "yes" ]; then
-       deleteNotation $proof
+       deleteNotation $notation
       else
          echo -e "Delete aborted. \n\n\n"
       fi
@@ -262,7 +272,7 @@ while [ $keyoxidizer_keyType != "q" ]; do
          listProofs
          ;;
       4)
-         deleteProofs
+         deleteProof
          ;;
       q)
          break
