@@ -196,7 +196,7 @@ generateNotationScript()
    chmod +x ./keyoxidizer_getNotationList.sh
 }
 
-manageProofs()
+listProofs()
 {
    generateNotationScript # generate script each time so code isn't stale
    ./keyoxidizer_getNotationList.sh
@@ -204,8 +204,8 @@ manageProofs()
 
    echo -e "\n\n\n=================================================="
    echo -e "This key contains the following proofs:"
-   grep "proof@metacode.biz=" keyoxidizer.showpref | \
-      awk '{if($1 == "Notations:") print $2; else print $1;}'
+   grep proof@metacode.biz ./keyoxidizer.showpref | \
+      awk '{if($1 == "Notations:") print NR ". " $2; else print NR ". " $1;}'
    echo -e "==================================================\n\n\n"
 }
 
@@ -232,7 +232,7 @@ while [ $keyoxidizer_keyType != "q" ]; do
          ;;
       3)
          existingKey
-         manageProofs
+         listProofs
          ;;
       q)
          break
