@@ -25,6 +25,7 @@ chmod +x ./keyoxidizer.sh
 - Load existing key
 - Add proofs for Supported Platforms
 - List proofs
+- Delete proofs (currently requires pasting a command and typing "save" see [[/issues/1][issue 1]])
 
 * Supported Platforms
 - Domain/DNS (note: sometimes DNS records take some time to update)
