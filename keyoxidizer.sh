@@ -215,12 +215,13 @@ deleteNotation()
 {
    fingerPrint=`cat keyoxidizer.fingerprint`
    removeNotation="-$1"
-   echo $removeNotation #debug
-   {
-      echo notation
-      echo $removeNotation
-      echo save
-   } | gpg --command-fd=0 --status-fd=1 --edit-key $fingerPrint
+
+   echo -e "A more user-friendly version is being investigated, until then in the gpg prompt that pops up:\n
+      1. type 'notation' and press enter \n
+      2. paste the following and press enter: $removeNotation\n
+      3. agree to delete and enter password to confirm \n
+      4. type 'save' and press enter\n
+   gpg --edit-key $fingerPrint
    gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
 
    echo -e "Deleted $1\n\n\n"
