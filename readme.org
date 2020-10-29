@@ -25,13 +25,14 @@ chmod +x ./keyoxidizer.sh
 - Load existing key
 - Add proofs for Supported Platforms
 - List proofs
-- Delete proofs (currently requires pasting a command and typing "save" see [[/shombando/keyoxidizer/issues/1][issue 1]])
+- Delete proofs (currently requires pasting a command and typing "save" see issue 1)
 
 * Supported Platforms
 - Domain/DNS (note: sometimes DNS records take some time to update)
 - Gitea
 - Github
 - Mastodon
+- Twitter
 
 * Roadmap
 - Incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.

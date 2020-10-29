@@ -148,6 +148,23 @@ github()
    fi
 }
 
+twitter()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into your Twitter account tweet out this status:"
+   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Twitter account. For details check out https://keyoxide.org/guides/openpgp-proofs \n\
+      [Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter the full url of your tweet (ex: https://twitter.com/USERNAME/status/1234567891234567891): " keyoxidizer_url
+     addNotation $keyoxidizer_url
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    existingKey
@@ -156,6 +173,7 @@ addProof()
    echo -e "2. Gitea"
    echo -e "3. Github"
    echo -e "4. Mastadon"
+   echo -e "5. Twitter"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -171,6 +189,9 @@ addProof()
          ;;
       4)
          mastodon
+         ;;
+      5)
+         twitter
          ;;
       q)
          break
@@ -220,7 +241,7 @@ deleteNotation()
       1. type 'notation' and press enter \n
       2. paste the following and press enter: $removeNotation\n
       3. agree to delete and enter password to confirm \n
-      4. type 'save' and press enter\n
+      4. type 'save' and press enter\n"
    gpg --edit-key $fingerPrint
    gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
 
