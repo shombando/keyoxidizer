@@ -1,8 +1,8 @@
 #+TITLE:Keyoxidizer - Interactive Keyoxide helper
 
 * Objective
-This is a simple utility designed to make working with [[https://keyoxide.org][Keyoxide]] easier. Keyoxidizer guides the user with prompts to gather their (name, email, etc.) and then handles all the details to generate the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. It will then guide the user in proving ownership their online accounts supported by Keyoxide.
-This is an unofficial thin wrapper around Keyoxide but it does not (and may never) support all Keyoxide features.
+This is a simple utility designed to make working with [[https://keyoxide.org][Keyoxide]] easier. Keyoxidizer guides the user with prompts to gather their (name, email, etc.) and then handles all the details to generate the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. It will then guide the user in proving ownership their online accounts supported by Keyoxide. Keyoxide will also guide the user through viewing and modifying the proofs (notations) in their key.
+This is an unofficial helper around Keyoxide but it does not (and may never) support all Keyoxide features. The goal is to lower the barrier to entry so this will remain a single file utility and have no external dependencies aside from ~bash~ and ~gpg~.
 
 * Usage
 ** Option 1
@@ -20,11 +20,19 @@ chmod +x ./keyoxidizer.sh
 ./keyoxidizer.sh
 #+END_SRC
 
+* Features
+- Generate new key pairs
+- Load existing key
+- Add proofs for Supported Platforms
+- List proofs
+- Delete proofs (currently requires pasting a command and typing "save" see issue 1)
+
 * Supported Platforms
 - Domain/DNS (note: sometimes DNS records take some time to update)
 - Gitea
 - Github
 - Mastodon
+- Twitter
 - Reddit
 
 * Roadmap
