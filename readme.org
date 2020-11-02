@@ -33,6 +33,7 @@ chmod +x ./keyoxidizer.sh
 - Github
 - Mastodon
 - Twitter
+- Reddit
 
 * Roadmap
 - Incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.
