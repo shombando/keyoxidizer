@@ -198,6 +198,23 @@ twitter()
    fi
 }
 
+hackernews()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into hackernews and click on your username."
+   echo -e "Add the following lines to your about:"
+   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Hackernews account. For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter your Hackernews username here: " hackernews_username
+     addNotation "https://news.ycombinator.com/user?id=$hackernews_username"
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    existingKey
@@ -209,6 +226,7 @@ addProof()
    echo -e "5. Mastadon"
    echo -e "6. Twitter"
    echo -e "7. Reddit"
+   echo -e "8. Hackernews"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -233,6 +251,9 @@ addProof()
          ;;
       7)
          reddit
+         ;;
+      8)
+         hackernews
          ;;
       q)
          break
