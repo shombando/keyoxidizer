@@ -165,6 +165,22 @@ github()
    fi
 }
 
+gitlab() {
+   fingerPrint=$(cat keyoxidizer.fingerprint)
+
+   echo -e "Log into your GitLab instance (like gitlab.com account) and create a new project with a name of your choosing and the project slug set to 'gitlab_proof'."
+   echo -e "Set the project description to: "
+   echo -e "[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+      read -p "Enter the full url of the repo you created (ex: https://gitlab.example.com/USERNAME/gitlab_proof): " keyoxidizer_url
+      addNotation $keyoxidizer_url
+   else
+      echo -e "Exiting"
+   fi
+}
+
 twitter()
 {
    fingerPrint=`cat keyoxidizer.fingerprint`
@@ -182,6 +198,40 @@ twitter()
    fi
 }
 
+hackernews()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into hackernews and click on your username."
+   echo -e "Add the following lines to your about:"
+   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Hackernews account. For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter your Hackernews username here: " hackernews_username
+     addNotation "https://news.ycombinator.com/user?id=$hackernews_username"
+   else
+     echo -e "Exiting"
+   fi
+}
+
+devto()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   read -p "Enter your dev.to username: " keyoxidizer_username
+   echo -e "Log into your dev.to account and create a new post with the following text:"
+   echo -e "This is an OpenPGP proof that connects [my OpenPGP key](https://keyoxide.org/$fingerPrint) to [this dev.to account](https://dev.to/$keyoxidizer_username). For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter the full url of the post you created (ex: https://dev.to/USERNAME/POST_TITLE): " keyoxidizer_url
+     addNotation $keyoxidizer_url
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    existingKey
@@ -189,9 +239,12 @@ addProof()
    echo -e "1. DNS/Domain"
    echo -e "2. Gitea"
    echo -e "3. Github"
-   echo -e "4. Mastadon"
-   echo -e "5. Twitter"
-   echo -e "6. Reddit"
+   echo -e "4. Gitlab"
+   echo -e "5. Mastadon"
+   echo -e "6. Twitter"
+   echo -e "7. Reddit"
+   echo -e "8. Hackernews"
+   echo -e "9. dev.to"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -206,13 +259,22 @@ addProof()
          github
          ;;
       4)
-         mastodon
+         gitlab
          ;;
       5)
-         twitter
+         mastodon
          ;;
       6)
+         twitter
+         ;;
+      7)
          reddit
+         ;;
+      8)
+         hackernews
+         ;;
+      9)
+         devto
          ;;
       q)
          break

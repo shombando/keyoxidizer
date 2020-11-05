@@ -31,9 +31,12 @@ chmod +x ./keyoxidizer.sh
 - Domain/DNS (note: sometimes DNS records take some time to update)
 - Gitea
 - Github
+- Gitlab
 - Mastodon
 - Twitter
 - Reddit
+- Hackernews
+- dev.to
 
 * Roadmap
 - Incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.
