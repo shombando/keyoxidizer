@@ -353,18 +353,18 @@ deleteProof()
 }
 
 # User request handling
-keyoxidizer_keyType="1"
+keyoxidizer_response="0"
 
-while [ $keyoxidizer_keyType != "q" ]; do
+while [ $keyoxidizer_response != "q" ]; do
       echo -e "Select an option: \n\
          1. Create a new key. \n\
          2. Add proofs to existing key. \n\
          3. List proofs from existing key. \n\
          4. Delete proofs from existing key. \n\
          Enter 'q' to quit"
-      read keyoxidizer_keyType
+      read keyoxidizer_response
 
-      case $keyoxidizer_keyType in
+      case $keyoxidizer_response in
       1)
          newKey
          exportOpenPGP
