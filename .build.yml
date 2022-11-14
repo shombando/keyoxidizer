@@ -1,0 +1,27 @@
+image: alpine/edge
+packages:
+  - pandoc
+  - curl
+  - jq
+secrets:
+  - f6ce6e26-6f68-4ed1-93b7-359f72bca15f
+environment:
+  REPO_ID: 218443
+  README: README.html
+tasks:
+  - convert-readme: |
+      pandoc -o README.html ./keyoxidizer/readme.org
+  - update-readme: |
+      set +x  # Avoid echoing the token
+      jq -sR '{
+          "query": "mutation UpdateRepo($id: Int!, $readme: String!) {
+                       updateRepository(id: $id, input: { readme: $readme }) { id }
+                   }",
+          "variables": {
+            "id": '$REPO_ID',
+            "readme": .
+          } }' < $README \
+        | curl --oauth2-bearer "$(cat ~/.api-token)" \
+          -H "Content-Type: application/json" \
+          -d@- https://git.sr.ht/query &&
+      echo "README set"
