@@ -120,7 +120,7 @@ dns()
    fingerPrint=`cat keyoxidizer.fingerprint`
    read -p "Enter the domain or subdomain do you want to proove (ex: keyoxide.org -- don't include https://): " keyoxidizer_domain
 
-   echo -e "Add a text record to your DNS records of your domain/sub-domain.\nThe exact instructions will depend on your domain registrar (ex: namecheap) or hosting interface (ex: cpanel): "
+   echo -e "Add a text record to your DNS records of your domain/sub-domain.\nThe exact instructions will depend on your domain registrar (ex: namecheap) or hosting interface (ex: cpanel), ensure the TXT record host name matches $keyoxidizer_domain precisely.\n"
    echo -e "Paste this into your DNS text record: \nopenpgp4fpr:$fingerPrint"
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
@@ -158,7 +158,7 @@ github()
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
-     read -p "Enter the full url of the repo you created (ex: https://codeberg.org/keyoxide/gitea_proof): " keyoxidizer_url
+     read -p "Enter the full url of the gist you created (ex: https://github.com/USERNAME/asdf12345): " keyoxidizer_url
      addNotation $keyoxidizer_url
    else
      echo -e "Exiting"
@@ -240,7 +240,7 @@ addProof()
    echo -e "2. Gitea"
    echo -e "3. Github"
    echo -e "4. Gitlab"
-   echo -e "5. Mastadon"
+   echo -e "5. Mastodon"
    echo -e "6. Twitter"
    echo -e "7. Reddit"
    echo -e "8. Hackernews"
