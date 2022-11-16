@@ -30,7 +30,7 @@ newKey()
    read -p "Enter comment about key: " keyoxidizer_comment
    generateConfig
    echo "You'll now be asked to enter a password to secure the key"
-   sleep 1.5s
+   sleep 1.5
    gpg --batch --generate-key ./keyoxidizer.config
    gpg --fingerprint #clears out meta output
    printFingerPrint $keyoxidizer_email
