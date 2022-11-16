@@ -73,7 +73,7 @@ addNotation()
    fingerPrint=`cat keyoxidizer.fingerprint`
    {
       echo notation
-      echo proof@metacode.biz=$1
+      echo proof@ariadne.id=$1
       echo save
    } | gpg --command-fd=0 --status-fd=1 --edit-key $fingerPrint
    gpg --keyserver hkps://keys.openpgp.org --send-keys $fingerPrint
@@ -290,7 +290,7 @@ addProof()
 # so I'm having to capture the whole thing to file and grep it.
 #
 # echo showpref | gpg  --command-fd=0 --status-fd=1 --edit-key $fingerPrint | \
-#   grep "proof@metacode.biz=" | \
+#   grep "proof@ariadne.id=" | \
 #   awk '{if($1 == "Notations:") print $2; else print $1;}'
 generateNotationScript()
 {
@@ -310,7 +310,7 @@ listProofs()
 
    echo -e "\n\n\n=================================================="
    echo -e "This key contains the following proofs:"
-   grep proof@metacode.biz ./keyoxidizer.showpref | \
+   grep proof@ariadne.id ./keyoxidizer.showpref | \
       awk '{if($1 == "Notations:") print NR ". " $2; else print NR ". " $1;}'
    echo -e "==================================================\n"
 }
@@ -335,7 +335,7 @@ deleteProof()
 {
    listProofs
    read -p "Enter the number of the proof you want to delete: " keyoxidizer_response
-   proofs=($(grep proof@metacode.biz ./keyoxidizer.showpref | awk '{if($1 == "Notations:") print $2; else print $1;}'))
+   proofs=($(grep proof@ariadne.id ./keyoxidizer.showpref | awk '{if($1 == "Notations:") print $2; else print $1;}'))
 
    if [ $((keyoxidizer_response)) -gt ${#proofs[*]} ]; then
     echo -e "Please make a valid selection. Aborting delete."
