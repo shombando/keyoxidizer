@@ -20,6 +20,8 @@ chmod +x ./keyoxidizer.sh
 ./keyoxidizer.sh
 #+END_SRC
 
+The releases link on Github and Codeberg will contain tagged versions with change logs. However, downloading the script from the repo root is recommended since it will be most up to date version with latest bug fix.
+
 * Features
 - Generate new key pairs
 - Load existing key
@@ -28,19 +30,22 @@ chmod +x ./keyoxidizer.sh
 - Delete proofs (currently requires pasting a command and typing "save" see issue 1)
 
 * Supported Platforms
-- Domain/DNS (note: sometimes DNS records take some time to update)
-- Gitea
-- Github
-- Gitlab
-- Mastodon
-- Twitter
-- Reddit
-- Hackernews
-- dev.to
+1. Domain/DNS (note: sometimes DNS records take some time to update)
+2. Gitea
+3. Github
+4. Gitlab
+5. Mastodon
+6. Twitter
+7. Reddit
+8. Hackernews
+9. dev.to
+10. IRC
+11. Matrix
 
 * Roadmap
-- Incrementally add support for adding proofs to the [[https://keyoxide.org/guides][the different platforms]]. They will be listed under the [[Supported Platforms]] sections.
-- [[https://keyoxide.org/guides/managing-proofs-listing][List]] and [[https://keyoxide.org/guides/managing-proofs-deleting][delete]] proofs
+- Incrementally add support for adding proofs to [[https://docs.keyoxide.org/][the supported service providers]]. They will be listed under the [[Supported Platforms]] sections.
+- +List and delete proofs+ - done but delete is a bit tedious
+- Setup a build pipeline to automate releases for a tagged release.
 
 * Contributing
 I absolutely welcome feedback in the form of PRs, whether it is improving my shell scripting or adding new functionality. A few guidelines to help me out:

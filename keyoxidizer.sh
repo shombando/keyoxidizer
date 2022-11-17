@@ -104,7 +104,7 @@ reddit()
 
    echo -e "Log into your Reddit account and create a new post on your profile"
    echo -e "Paste in the following as the content:"
-   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Reddit account. For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Reddit account. For details check out https://docs.keyoxide.org/service-providers/reddit/\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
@@ -154,7 +154,7 @@ github()
 
    read -p "Enter your Github username: " keyoxidizer_username
    echo -e "Log into your Github account and create a new gist called 'openpgp.md'. \nPaste the following into the gist and be sure to select 'Create public gist':"
-   echo -e "This is an OpenPGP proof that connects [my OpenPGP key](https://keyoxide.org/$fingerPrint) to [this Github account](https://github.com/$keyoxidizer_username). For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+   echo -e "This is an OpenPGP proof that connects [my OpenPGP key](https://keyoxide.org/$fingerPrint) to [this Github account](https://github.com/$keyoxidizer_username). For details check out https://docs.keyoxide.org/service-providers/github/\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
@@ -186,7 +186,7 @@ twitter()
    fingerPrint=`cat keyoxidizer.fingerprint`
 
    echo -e "Log into your Twitter account tweet out this status:"
-   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Twitter account. For details check out https://keyoxide.org/guides/openpgp-proofs \n\
+   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Twitter account. For details check out https://docs.keyoxide.org/service-providers/twitter/ \n\
       [Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
@@ -204,7 +204,7 @@ hackernews()
 
    echo -e "Log into hackernews and click on your username."
    echo -e "Add the following lines to your about:"
-   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Hackernews account. For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+   echo -e "This is an OpenPGP proof that connects my OpenPGP key to this Hackernews account. For details check out https://docs.keyoxide.org/service-providers/hackernews/\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
@@ -221,7 +221,7 @@ devto()
 
    read -p "Enter your dev.to username: " keyoxidizer_username
    echo -e "Log into your dev.to account and create a new post with the following text:"
-   echo -e "This is an OpenPGP proof that connects [my OpenPGP key](https://keyoxide.org/$fingerPrint) to [this dev.to account](https://dev.to/$keyoxidizer_username). For details check out https://keyoxide.org/guides/openpgp-proofs\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
+   echo -e "This is an OpenPGP proof that connects [my OpenPGP key](https://keyoxide.org/$fingerPrint) to [this dev.to account](https://dev.to/$keyoxidizer_username). For details check out https://docs.keyoxide.org/service-providers/devto/\n\n[Verifying my OpenPGP key: openpgp4fpr:$fingerPrint]"
 
    read -p "Have completed this step (y/N): " keyoxidizer_response
    if [ "$keyoxidizer_response" == "y" ]; then
