@@ -250,6 +250,27 @@ irc()
    fi
 }
 
+matrix()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+   echo "Matrix proof is a little more involved, please pay close attention. Using the Element web application is recommended to make the information gathering easier (nicely formatted JSON) but any client would work.  Consult https://docs.keyoxide.org/service-providers/matrix/"
+   read -p "What is your Matrix server (like matrix.org)? " matrix_server
+   read -p "What is your Matrix username? " matrix_user
+   echo -e "Log into your matrix server $matrix_user@$matrix_server"
+   echo -e "Join the #doipver:matrix.org room and post the following message:"
+   echo -e "openpgp4fpr:$fingerPrint"
+#https://matrix.to/#/!dBfQZxCoGVmSTujfiv:matrix.org/$wzNgWBGWFPCxY8mOvXSO3zlONa0rMxZ70CWoqvzRBCI?via=matrix.org&via=tchncs.de&via=matrix.fedibird.com
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   matrix_room="!dBfQZxCoGVmSTujfiv:matrix.org"
+   if [ "$keyoxidizer_response" == "y" ]; then
+     echo -e "Inspect the message and look for the event id either by view source (event_id) or share (string right after matrix.org/) and copy it (make sure to grab the leading $ symbol)."
+     read -p "What's the event id? " keyoxidizer_url
+     addNotation "matrix:u/@$matrix_user:$matrix_server?org.keyoxide.r=$matrix_room&org.keyoxide.e=$keyoxidizer_url" 
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    existingKey
@@ -264,6 +285,7 @@ addProof()
    echo -e "08. Hackernews"
    echo -e "09. dev.to"
    echo -e "10. IRC"
+   echo -e "11. Matrix"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -297,6 +319,9 @@ addProof()
          ;;
       10)
          irc
+         ;;
+      11)
+         matrix
          ;;
       q)
          break
