@@ -367,7 +367,7 @@ deleteNotation()
    fingerPrint=`cat keyoxidizer.fingerprint`
    removeNotation="-$1"
 
-   echo -e "A more user-friendly version is being investigated, until then in the gpg prompt that pops up:\n
+   echo -e "A more user-friendly version is being investigated, until then in the gpg prompt that pops up (CRTL+C to abort):\n
       1. type 'notation' and press enter \n
       2. paste the following and press enter: $removeNotation\n
       3. agree to delete and enter password to confirm \n
@@ -389,7 +389,7 @@ deleteProof()
    else
       notation=${proofs[(($keyoxidizer_response-1))]} #1 indexed menus
       echo -e "You selected: \n$keyoxidizer_response. $notation"
-      read -p "Enter \"yes\" to delete the proof, 'q' to abort: " keyoxidizer_response
+      read -p "Enter \"yes\" to delete the proof and then follow the instructions displayed, 'q' to abort: " keyoxidizer_response
       if [ "$keyoxidizer_response" == "yes" ]; then
        deleteNotation $notation
       else
