@@ -232,19 +232,38 @@ devto()
    fi
 }
 
+irc()
+{
+   fingerPrint=`cat keyoxidizer.fingerprint`
+
+   echo -e "Log into your irc server (like libera.chat account) with your NICK/password and message NickServ."
+   echo -e "/msg NickServ SET PROPERTY KEY openpgp4fpr:$fingerPrint"
+   echo -e "Verify whether the key was set by messaging"
+   echo -e "/msg NickServ TAXONOMY NICK"
+
+   read -p "Have completed this step (y/N): " keyoxidizer_response
+   if [ "$keyoxidizer_response" == "y" ]; then
+     read -p "Enter the full url of your server with nick (ex: irc://irc.libera.chat/keyoxide): " keyoxidizer_url
+     addNotation $keyoxidizer_url
+   else
+     echo -e "Exiting"
+   fi
+}
+
 addProof()
 {
    existingKey
    echo -e "Select platform to add proof"
-   echo -e "1. DNS/Domain"
-   echo -e "2. Gitea"
-   echo -e "3. Github"
-   echo -e "4. Gitlab"
-   echo -e "5. Mastodon"
-   echo -e "6. Twitter"
-   echo -e "7. Reddit"
-   echo -e "8. Hackernews"
-   echo -e "9. dev.to"
+   echo -e "01. DNS/Domain"
+   echo -e "02. Gitea"
+   echo -e "03. Github"
+   echo -e "04. Gitlab"
+   echo -e "05. Mastodon"
+   echo -e "06. Twitter"
+   echo -e "07. Reddit"
+   echo -e "08. Hackernews"
+   echo -e "09. dev.to"
+   echo -e "10. IRC"
    echo -e "Enter 'q' to quit to main menu"
    read keyoxidizer_proof
 
@@ -275,6 +294,9 @@ addProof()
          ;;
       9)
          devto
+         ;;
+      10)
+         irc
          ;;
       q)
          break
