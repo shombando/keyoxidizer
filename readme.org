@@ -4,6 +4,9 @@
 This is a simple utility designed to make working with [[https://keyoxide.org][Keyoxide]] easier. Keyoxidizer guides the user with prompts to gather their (name, email, etc.) and then handles all the details to generate the PGP key and exports it to [[https://keys.openpgp.org][OpenPGP]] key server. It will then guide the user in proving ownership their online accounts supported by Keyoxide. Keyoxide will also guide the user through viewing and modifying the proofs (notations) in their key.
 This is an unofficial helper around Keyoxide but it does not (and may never) support all Keyoxide features. The goal is to lower the barrier to entry so this will remain a single file utility and have no external dependencies aside from ~bash~ and ~gpg~.
 
+* Security and Privacy
+The author is not an authority on security or privacy, please use at your own risk. The current default option will generate a 3072-bit RSA key with a single sub-key. If you want to generate multiple sub-keys or change other security options, please generate key outside of this script and use this script. If you want to hash your proofs then please consult [[https://blog.keyoxide.org/hashing-identity-proofs/][this Keyoxide blog post]]. Please take a look at [[https://github.com/shombando/keyoxidizer/issues/7][the discussion here]] for further information and feedback from the community.
+
 * Usage
 ** Option 1
 Clone the repo. Run the script.
@@ -46,6 +49,7 @@ The releases link on Github and Codeberg will contain tagged versions with chang
 - Incrementally add support for adding proofs to [[https://docs.keyoxide.org/][the supported service providers]]. They will be listed under the [[Supported Platforms]] sections.
 - +List and delete proofs+ - done but delete is a bit tedious
 - Setup a build pipeline to automate releases for a tagged release.
+- Additional security and privacy options.
 
 * Contributing
 I absolutely welcome feedback in the form of PRs, whether it is improving my shell scripting or adding new functionality. A few guidelines to help me out:

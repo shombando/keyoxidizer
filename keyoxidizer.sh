@@ -24,6 +24,7 @@ EOF
 # Generate and upload
 newKey()
 {
+   echo "This function will generate a 3072-bit RSA key, if you want to generate additional sub keys or configure other options, please generate a key outside this tool."
    echo "Generating new key..."
    read -p "Enter full name: " keyoxidizer_name
    read -p "Enter email: " keyoxidizer_email
@@ -274,6 +275,7 @@ matrix()
 addProof()
 {
    existingKey
+   echo -e "Consult https://blog.keyoxide.org/hashing-identity-proofs/ to conceal identity proofs"
    echo -e "Select platform to add proof"
    echo -e "01. DNS/Domain"
    echo -e "02. Gitea"
