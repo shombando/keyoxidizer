@@ -5,7 +5,7 @@ This is a simple utility designed to make working with [[https://keyoxide.org][K
 This is an unofficial helper around Keyoxide but it does not (and may never) support all Keyoxide features. The goal is to lower the barrier to entry so this will remain a single file utility and have no external dependencies aside from ~bash~ and ~gpg~.
 
 * Security and Privacy
-The author is not an authority on security or privacy, please use at your own risk. The current default option will generate a 3072-bit RSA key with a single sub-key. If you want to generate multiple sub-keys or change other security options, please generate key outside of this script and use this script. If you want to hash your proofs then please consult [[https://blog.keyoxide.org/hashing-identity-proofs/][this Keyoxide blog post]]. Please take a look at [[https://github.com/shombando/keyoxidizer/issues/7][the discussion here]] for further information and feedback from the community.
+The author is not an authority on security or privacy, please use at your own risk. The current default option will generate a key with a single sub-key both using ed25519 curve, I believe this to be the best option for general usage at this point (2024). However, if you want to generate multiple sub-keys or change other security options, please generate key outside of this script and use this script. If you want to hash your proofs then please consult [[https://blog.keyoxide.org/hashing-identity-proofs/][this Keyoxide blog post]]. Please take a look at [[https://github.com/shombando/keyoxidizer/issues/7][the discussion here]] for further information and feedback from the community.
 
 * Usage
 ** Option 1

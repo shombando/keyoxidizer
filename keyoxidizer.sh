@@ -8,9 +8,10 @@ generateConfig()
 {
 cat > ./keyoxidizer.config<<EOF
 #%dry-run
-Key-Type: RSA
-Key-Length: 3072
-Subkey-Type: RSA
+Key-Type: EDDSA
+Key-Curve: ed25519
+Subkey-Type: ECDH
+Subkey-Curve: cv25519
 Name-Real: $keyoxidizer_name
 Name-Email: $keyoxidizer_email
 Name-Comment: $keyoxidizer_comment
