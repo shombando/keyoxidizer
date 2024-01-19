@@ -4,7 +4,7 @@ packages:
   - curl
   - jq
 secrets:
-  - f6ce6e26-6f68-4ed1-93b7-359f72bca15f
+  - 5daebabf-5eed-4d09-9ded-61aee555be44
 environment:
   REPO_ID: 218443
   README: README.html
